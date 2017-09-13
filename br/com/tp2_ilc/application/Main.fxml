@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.tp2_ilc.application.Controller">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Proposicoes" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets left="70.0" />
+               </padding>
+            </Label>
+            <TableView fx:id="tabelaProposicao" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="colunaCaracter" prefWidth="62.0" text="Caractere" />
+                <TableColumn fx:id="colunaSentenca" prefWidth="137.0" text="Sentenca" />
+              </columns>
+            </TableView>
+            <HBox spacing="5.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#inserirProposicao" prefHeight="30.0" prefWidth="30.0" text="+" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deletarProposicao" prefHeight="30.0" prefWidth="30.0" text="-" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="60.0" right="60.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Formulas" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets left="120.0" />
+               </padding>
+            </Label>
+            <ListView prefHeight="200.0" prefWidth="200.0" />
+            <HBox spacing="5.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="+" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="110.0" right="110.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView prefHeight="400.0" prefWidth="300.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="prop1" />
+                <TableColumn prefWidth="75.0" text="prop2" />
+                  <TableColumn prefWidth="149.0" text="formula" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>

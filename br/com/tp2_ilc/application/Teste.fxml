@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="br.com.tp2_ilc.controller.Controller">
+   <children>
+      <SplitPane dividerPositions="0.496" layoutY="31.0" prefHeight="369.0" prefWidth="353.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="171.0">
+               <children>
+                  <Label layoutX="54.0" layoutY="14.0" text="Proposições" />
+                  <Separator layoutY="31.0" prefHeight="2.0" prefWidth="171.0" />
+                  <Separator layoutX="2.0" layoutY="319.0" prefHeight="3.0" prefWidth="171.0" />
+                  <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
+                  <Button layoutX="54.0" layoutY="328.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="-" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="83.0">
+               <children>
+                  <Label layoutX="63.0" layoutY="14.0" text="Formulas" textAlignment="CENTER" />
+                  <Separator layoutX="-1.0" layoutY="31.0" prefHeight="3.0" prefWidth="174.0" />
+                  <Separator layoutY="318.0" prefHeight="3.0" prefWidth="174.0" />
+                  <Button layoutX="14.0" layoutY="328.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
+                  <Button layoutX="51.0" layoutY="328.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="-" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.5" layoutX="353.0" layoutY="32.0" orientation="VERTICAL" prefHeight="369.0" prefWidth="248.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="187.0" prefWidth="246.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView layoutX="1.0" layoutY="1.0" prefHeight="180.0" prefWidth="246.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="A" />
+                      <TableColumn prefWidth="75.0" text="B" />
+                        <TableColumn prefWidth="95.0" text="A V B" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <MenuBar layoutY="-3.0" prefHeight="35.0" prefWidth="183.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Criar operador customizado">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+              </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label layoutX="301.0" prefHeight="31.0" prefWidth="300.0" text="Operadores disponíveis: " />
+   </children>
+</AnchorPane>
