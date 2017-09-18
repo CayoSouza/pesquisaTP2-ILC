@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.tp2_ilc.model.*;
+import javafx.beans.value.ObservableValue;
 
 public class Formula{
 	private boolean bemFormada;
 	private List<Simbolo> simbolos;
+	private String simboloz;
 	
 	public Formula(List<Simbolo> simbolos){
 		this.simbolos = simbolos;
@@ -52,6 +54,17 @@ public class Formula{
 			formula += sim.getCaractere();
 		}
 		return formula;
+	}
+	public String getSimboloz() {
+		String formula = "";
+		for(Simbolo sim: simbolos) {
+			formula += sim.getCaractere();
+		}
+		this.simboloz = formula;
+		return this.simboloz;
+	}
+	public void setSimboloz(String simboloz) {
+		this.simboloz = simboloz;
 	}
 	public void setSimbolos(List<Simbolo> simbolos) {
 		this.simbolos = simbolos;
