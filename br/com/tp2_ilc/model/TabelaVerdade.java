@@ -7,8 +7,18 @@ public class TabelaVerdade {
 
 	ArrayList<Interpretacao> interpretacoes = new ArrayList<Interpretacao>();
 	ArrayList<ValorVerdade> valoresVerdade = new ArrayList<ValorVerdade>();
-	FBF formula;
 	ArrayList<Atomo> listaProposicoes = new ArrayList<Atomo>();
+	FBF formula;
+	
+	public TabelaVerdade(ArrayList<Atomo> listaProposicoes, FBF formula) {
+		super();
+		this.interpretacoes = interpretacoes;
+		this.valoresVerdade = valoresVerdade;
+		this.listaProposicoes = listaProposicoes;
+		this.formula = formula;
+	}
+	
+	
 	public ArrayList<Interpretacao> getInterpretacoes() {
 		return interpretacoes;
 	}
@@ -21,6 +31,7 @@ public class TabelaVerdade {
 		interpretacoes.add(interpretacao);
 	}
 	
+
 	public void adicionarValorVerdade(ValorVerdade valor) {
 		valoresVerdade.add(valor);
 	}
@@ -134,7 +145,7 @@ public class TabelaVerdade {
 	}
 
 	
-	/*DEBUG
+	
 	public void exibeTabelaVerdade() {
 		int cont = 1;
 		for(Interpretacao interpretacao: interpretacoes) {
@@ -145,5 +156,5 @@ public class TabelaVerdade {
 			cont++;
 			System.out.println("");
 		}	
-	}*/
+	}
 }

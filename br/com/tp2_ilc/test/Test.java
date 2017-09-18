@@ -156,6 +156,7 @@ public class Test {
 		FBF fbfnT = new FBF(negacao, fbfT);
 		FBF fbfR_e_fbfnT = new FBF(e, fbfR,fbfnT);
 		FBF fbfP_e_fbfR_e_fbfS_ou_fbfQ_e_T_ou_fbfR_e_fbfnT = new FBF(ou, fbfP_e_fbfR_e_fbfS_ou_fbfQ_e_T, fbfR_e_fbfnT);
-		fbfP_e_fbfR_e_fbfS_ou_fbfQ_e_T_ou_fbfR_e_fbfnT.geraTabelaVerdade();
+		TabelaVerdade tv = fbfP_e_fbfR_e_fbfS_ou_fbfQ_e_T_ou_fbfR_e_fbfnT.geraTabelaVerdade();
+		//tv.exibeTabelaVerdade();
 	}
 }
