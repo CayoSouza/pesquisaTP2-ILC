@@ -3,6 +3,8 @@ package br.com.tp2_ilc.application;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -16,6 +18,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Dialog;
@@ -74,6 +77,14 @@ public class Controller implements Initializable{
 		grid.setPadding(new Insets(20, 150, 10, 10));
 		TextField fieldCaractere = new TextField();
 		fieldCaractere.setPromptText("Caractere(apenas a primeira letra sera considerada)");
+		
+		//limitar caractere para um
+		Pattern pattern = Pattern.compile("\\w");
+		TextFormatter formatter = new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+		    return pattern.matcher(change.getControlNewText()).matches() ? change : null;
+		});
+		fieldCaractere.setTextFormatter(formatter);
+		
 		TextField fieldSentenca = new TextField();
 		fieldSentenca.setPromptText("Sentenca");
 		
@@ -90,12 +101,33 @@ public class Controller implements Initializable{
 			else return null;
 		});
 		
+		
+		
 		Optional<Pair<Character, String>> result = dialog.showAndWait();
 		result.ifPresent(caracterSentenca -> {
+			//checa se já existe proposicao com o caracter fornecido
+			for(Proposicao p : lista) 
+				if(p.getCaractere() == fieldCaractere.getText().charAt(0)) {
+					mostrarDialogoConfirmacao("Caracter já utilizado, a proposição não foi criada.");
+					return;
+				}
+			
 			lista.add(new Proposicao(
 					fieldCaractere.getText().charAt(0),
 					fieldSentenca.getText()));
 		});
+	}
+	
+	public void mostrarDialogoConfirmacao(String msg) {
+		Dialog<String> dialog = new Dialog<>();
+		dialog.setTitle("Informativo");
+		dialog.setHeaderText(msg);
+		ButtonType cancelButton = new ButtonType("Ok", ButtonData.CANCEL_CLOSE);
+		dialog.getDialogPane().getButtonTypes().add(cancelButton);
+		
+		GridPane grid = new GridPane();		
+		dialog.getDialogPane().setContent(grid);
+		dialog.show();
 	}
 
 }
