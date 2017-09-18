@@ -244,7 +244,7 @@ public class Controller implements Initializable{
 					for(FBF fbf : fbfs) {
 						if(fbf.pegaSimbolos().equals(stringFormula1))
 							formula1 = fbf;
-						else if(fbf.pegaSimbolos().equals(stringFormula2))
+						if(fbf.pegaSimbolos().equals(stringFormula2))
 							formula2 = fbf;
 					}
 					//tenho duas formulas
