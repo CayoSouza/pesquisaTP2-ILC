@@ -41,21 +41,17 @@ import br.com.tp2_ilc.model.*;
 
 public class Controller implements Initializable{
 	
+	//componentes de tabela
 	@FXML private TableView<Proposicao> tabelaProposicao;
 	@FXML private TableColumn<Proposicao, Character> colunaCaracter;
 	@FXML private TableColumn<Proposicao, String> colunaSentenca;
+	@FXML private TableView<FBF> tabelaFbf;
+	@FXML private TableColumn<FBF, String> colunaFbf;
 	
-	
-	
+	//comboboxes
 	@FXML private ComboBox<Character> comboConectivos = new ComboBox<>();
 	@FXML private ComboBox<String> comboFormulas1 = new ComboBox<>();
 	@FXML private ComboBox<String> comboFormulas2 = new ComboBox<>();
-	
-	public ObservableList<Proposicao> proposicoes = FXCollections.observableArrayList(
-			new Proposicao('a', "a água saudável"),
-			new Proposicao('b', "a bola é redonda"),
-			new Proposicao('c', "a casa é azul")
-			);
 	
 	ValorVerdade[][] conectivoE = {{ValorVerdade.FALSE, ValorVerdade.FALSE}, {ValorVerdade.FALSE,ValorVerdade.TRUE}};
 	ValorVerdade[][] conectivoOU = {{ValorVerdade.FALSE, ValorVerdade.TRUE}, {ValorVerdade.TRUE, ValorVerdade.TRUE}};
@@ -64,6 +60,12 @@ public class Controller implements Initializable{
 	ValorVerdade[][] conectivoDUPLAIMPLICACAO = {{ValorVerdade.TRUE,ValorVerdade.FALSE}, {ValorVerdade.FALSE,ValorVerdade.TRUE}};
 	ValorVerdade[] conectivoNEGACAO = {ValorVerdade.TRUE,ValorVerdade.FALSE};
 	
+	//listas
+	public ObservableList<Proposicao> proposicoes = FXCollections.observableArrayList(
+			new Proposicao('a', "a água saudável"),
+			new Proposicao('b', "a bola é redonda"),
+			new Proposicao('c', "a casa é azul")
+			);
 	public ObservableList<Conectivo> conectivos = FXCollections.observableArrayList(
 			new ConectivoBinario('^', conectivoE),
 			new ConectivoBinario('v', conectivoOU),
@@ -71,15 +73,11 @@ public class Controller implements Initializable{
 			new ConectivoBinario('→', conectivoIMPLICACAO),
 			new ConectivoUnario('¬', conectivoNEGACAO),
 			new ConectivoBinario('↔', conectivoDUPLAIMPLICACAO));
-	
 	public ObservableList<FBF> fbfs = FXCollections.observableArrayList(
 			new FBF(new Proposicao('a', "a água saudável")),
 			new FBF(new Proposicao('b', "a bola é redonda")),
 			new FBF(new Proposicao('c', "a casa é azul"))
 			);
-	@FXML private TableView<FBF> tabelaFbf;
-	@FXML private TableColumn<FBF, String> colunaFbf;
-//	@FXML private ListView<FBF> listaFbf = new ListView<>(fbfs);
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -105,13 +103,19 @@ public class Controller implements Initializable{
 	@FXML
 	public void deletarProposicao(ActionEvent event) {
 		Proposicao selecionada = tabelaProposicao.getSelectionModel().getSelectedItem();
-		tabelaProposicao.getItems().remove(selecionada);
+		proposicoes.remove(selecionada);
+		for(FBF fbf : fbfs) 
+			if(fbf.getSimboloz().charAt(0) == selecionada.getCaractere())
+				fbfs.remove(fbf);	
 	}
 	
 	@FXML
 	public void deletarFormula(ActionEvent event) {
 		FBF selecionada = tabelaFbf.getSelectionModel().getSelectedItem();
-		tabelaFbf.getItems().remove(selecionada);
+		fbfs.remove(selecionada);
+		for(Proposicao p : proposicoes)
+			if(selecionada.getRaiz().getCaractere() == p.getCaractere())
+				proposicoes.remove(p);
 	}
 	
 	public void mostrarDialogoProposicao() {
@@ -163,9 +167,12 @@ public class Controller implements Initializable{
 					return;
 				}
 			
-			proposicoes.add(new Proposicao(
+			Proposicao novaProp = new Proposicao(
 					txtCaractere.getText().charAt(0),
-					txtSentenca.getText()));
+					txtSentenca.getText());
+			proposicoes.add(novaProp);
+			FBF novaFbf = new FBF(novaProp);
+			fbfs.add(novaFbf);
 		});
 	}
 	
@@ -189,11 +196,16 @@ public class Controller implements Initializable{
 		for(Conectivo c : conectivos)
 			comboConectivos.getItems().add(c.getCaractere());
 		
-		for(FBF fbf : fbfs)
+		for(FBF fbf : fbfs) {
 			comboFormulas1.getItems().add(fbf.getSimboloz());
-		
-		for(FBF fbf : fbfs)
 			comboFormulas2.getItems().add(fbf.getSimboloz());
+		}
+		
+//		for(Proposicao p : proposicoes) {
+//			if(comboFormulas1.getItems().contains(o))
+//			comboFormulas1.getItems().add(String.valueOf(p.getCaractere()));
+//			comboFormulas2.getItems().add(String.valueOf(p.getCaractere()));
+//		}
 		
 		grid.add(new Label("Conectivos"), 0, 0);
 		grid.add(comboConectivos, 1, 0);
