@@ -73,9 +73,9 @@
                   <Insets left="120.0" />
                </padding>
             </Label>
-            <TableView fx:id="tabelaFbf" prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="tabelaFbf" onMouseClicked="#mostrarTabelaVerdade" prefHeight="201.0" prefWidth="300.0">
               <columns>
-                <TableColumn fx:id="colunaFbf" prefWidth="299.0" text="Símbolo" />
+                <TableColumn fx:id="colunaFbf" maxWidth="400.0" prefWidth="299.0" resizable="false" text="Símbolo" />
               </columns>
             </TableView>
             <HBox spacing="5.0">
@@ -94,13 +94,7 @@
    <right>
       <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView prefHeight="400.0" prefWidth="300.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="prop1" />
-                <TableColumn prefWidth="75.0" text="prop2" />
-                  <TableColumn prefWidth="149.0" text="formula" />
-              </columns>
-            </TableView>
+            <TableView fx:id="tableViewTabelaVerdade" maxWidth="1.7976931348623157E308" prefHeight="400.0" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </right>

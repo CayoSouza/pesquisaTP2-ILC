@@ -51,7 +51,7 @@ public class FBF extends Formula {
 		
 	}
 
-	public List<Atomo> getProposicoes() {
+	public ArrayList<Atomo> getProposicoes() {
 		return proposicoes;
 	}
 	
@@ -62,7 +62,7 @@ public class FBF extends Formula {
 		this.raiz = raiz;
 	}
 
-	public List<FBF> getArgumentos() {
+	public ArrayList<FBF> getArgumentos() {
 		return argumentos;
 	}
 

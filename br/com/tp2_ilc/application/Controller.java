@@ -1,14 +1,17 @@
 package br.com.tp2_ilc.application;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
-
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -28,6 +31,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TableView;
@@ -47,6 +51,8 @@ public class Controller implements Initializable{
 	@FXML private TableColumn<Proposicao, String> colunaSentenca;
 	@FXML private TableView<FBF> tabelaFbf;
 	@FXML private TableColumn<FBF, String> colunaFbf;
+	@FXML private TableView<ObservableList<String>> tableViewTabelaVerdade;
+	//@FXML private TableColumn<TabelaVerdade, FBF> colunaFbfTabelaVerdade;
 	
 	//comboboxes
 	@FXML private ComboBox<Character> comboConectivos = new ComboBox<>();
@@ -78,6 +84,7 @@ public class Controller implements Initializable{
 			new FBF(new Proposicao('b', "a bola é redonda")),
 			new FBF(new Proposicao('c', "a casa é azul"))
 			);
+	public ObservableList<Proposicao> proposicoesTabelaVerdade;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -102,19 +109,19 @@ public class Controller implements Initializable{
 	
 	@FXML
 	public void deletarProposicao(ActionEvent event) {
-		Proposicao selecionada = tabelaProposicao.getSelectionModel().getSelectedItem();
-		proposicoes.remove(selecionada);
+		Proposicao proposicaoSelecionada = tabelaProposicao.getSelectionModel().getSelectedItem();
+		proposicoes.remove(proposicaoSelecionada);
 		for(FBF fbf : fbfs) 
-			if(fbf.getSimboloz().charAt(0) == selecionada.getCaractere())
+			if(fbf.getSimboloz().charAt(0) == proposicaoSelecionada.getCaractere())
 				fbfs.remove(fbf);	
 	}
 	
 	@FXML
 	public void deletarFormula(ActionEvent event) {
-		FBF selecionada = tabelaFbf.getSelectionModel().getSelectedItem();
-		fbfs.remove(selecionada);
+		FBF fbfSelecionada = tabelaFbf.getSelectionModel().getSelectedItem();
+		fbfs.remove(fbfSelecionada);
 		for(Proposicao p : proposicoes)
-			if(selecionada.getRaiz().getCaractere() == p.getCaractere())
+			if(fbfSelecionada.getRaiz().getCaractere() == p.getCaractere())
 				proposicoes.remove(p);
 	}
 	
@@ -288,4 +295,38 @@ public class Controller implements Initializable{
 		dialog.show();
 	}
 
+	public void mostrarTabelaVerdade(MouseEvent event) {
+		FBF fbfSelecionada = tabelaFbf.getSelectionModel().getSelectedItem();
+		TabelaVerdade tabelaVerdade = fbfSelecionada.geraTabelaVerdade();
+		populaTabelaVerdade(tabelaVerdade);
+	}
+	
+	public void populaTabelaVerdade(TabelaVerdade tabelaVerdade) {
+		tableViewTabelaVerdade.getColumns().clear();
+		
+		ArrayList<Atomo> proposicoes = tabelaVerdade.getListaProposicoes();
+
+		List<String> nomeColunas = new ArrayList<>();
+		for(Atomo a : proposicoes)
+			nomeColunas.add(String.valueOf(a.getCaractere()));
+		
+		Collections.sort(nomeColunas);
+		
+		for(int i=0; i<nomeColunas.size(); i++) {
+			final int finalIdx = i;
+			
+			TableColumn<ObservableList<String>, String> coluna = new TableColumn<>(nomeColunas.get(i));
+			coluna.setCellValueFactory(param ->
+					new ReadOnlyObjectWrapper<>(param.getValue().get(finalIdx)));
+			coluna.setMaxWidth(30);
+			tableViewTabelaVerdade.getColumns().add(coluna);
+		}
+		
+		if(tabelaVerdade.getFormula().getArgumentos().size() > 0) {
+			TableColumn<ObservableList<String>, String> coluna = new TableColumn<>(tabelaVerdade.getFormula().pegaSimbolos());
+			tableViewTabelaVerdade.getColumns().add(coluna);
+		}
+
+		
+	}
 }

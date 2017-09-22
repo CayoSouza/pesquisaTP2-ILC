@@ -53,7 +53,7 @@ public class TabelaVerdade {
 		this.valoresVerdade = valoresVerdade;
 	}
 
-	public Formula getFormula() {
+	public FBF getFormula() {
 		return formula;
 	}
 
