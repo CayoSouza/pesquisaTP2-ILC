@@ -10,80 +10,35 @@ public class TabelaVerdade {
 	ArrayList<Atomo> listaProposicoes = new ArrayList<Atomo>();
 	FBF formula;
 	
-	public TabelaVerdade(ArrayList<Atomo> listaProposicoes, FBF formula) {
-		super();
-		this.interpretacoes = interpretacoes;
-		this.valoresVerdade = valoresVerdade;
-		this.listaProposicoes = listaProposicoes;
+	public TabelaVerdade(FBF formula) {
 		this.formula = formula;
+		this.listaProposicoes = formula.getProposicoes();
+		geraTabelaDeInterpretacoes();
+		preencheTabelaVerdade();
 	}
-	
 	
 	public ArrayList<Interpretacao> getInterpretacoes() {
 		return interpretacoes;
 	}
 
-	public void setInterpretacoes(ArrayList<Interpretacao> interpretacoes) {
-		this.interpretacoes = interpretacoes;
-	}
-	
-	public void adicionarInterpretacao(Interpretacao interpretacao) {
-		interpretacoes.add(interpretacao);
-	}
-	
-
-	public void adicionarValorVerdade(ValorVerdade valor) {
-		valoresVerdade.add(valor);
-	}
-	public boolean removerValorVerdade(ValorVerdade valor) {
-		return valoresVerdade.remove(valor);
-	}
-	
-	public void adicionarProposicao(Proposicao proposicao) {
-		listaProposicoes.add(proposicao);
-	}
-	public boolean removerProposicao(Proposicao proposicao) {
-		return listaProposicoes.remove(proposicao);
-	}
 	public ArrayList<ValorVerdade> getValoresVerdade() {
 		return valoresVerdade;
-	}
-
-	public void setValoresVerdade(ArrayList<ValorVerdade> valoresVerdade) {
-		this.valoresVerdade = valoresVerdade;
 	}
 
 	public FBF getFormula() {
 		return formula;
 	}
 
-	public void setFormula(FBF formula) {
-		this.formula = formula;
-	}
-
 	public ArrayList<Atomo> getListaProposicoes() {
 		return listaProposicoes;
-	}
-
-	public void setListaProposicoes(ArrayList<Atomo> listaProposicoes) {
-		this.listaProposicoes = listaProposicoes;
-	}
-
-	public boolean removerInterpretacao(Interpretacao interpretacao) {
-		if(interpretacoes.contains(interpretacao)) {
-			interpretacoes.remove(interpretacao);
-			return true;
-		}else 
-			return false;
 	}
 	
 	/*
 	 * Função que para cada interpretação adiciona na lista de valores verdade o valor correspondente a interpretação daquela formula
 	 */
 	public void preencheTabelaVerdade() {
-		for(Interpretacao interpretacao: interpretacoes) {
+		for(Interpretacao interpretacao: interpretacoes) 
 			valoresVerdade.add(calculaValorFormula(formula, interpretacao));
-		}
 	}
 	
 	/*
@@ -91,7 +46,6 @@ public class TabelaVerdade {
 	 * Ambas recebidas por parâmetro.
 	 */
 	private ValorVerdade calculaValorFormula(FBF fbf, Interpretacao interpretacao) {
-
 		ValorVerdade valor = null;
 		if(fbf.getRaiz() instanceof ConectivoUnario) {
 			ConectivoUnario conec = (ConectivoUnario) fbf.getRaiz();
@@ -144,8 +98,9 @@ public class TabelaVerdade {
 		}
 	}
 
-	
-	
+	/**
+	 * Método debug
+	 */
 	public void exibeTabelaVerdade() {
 		int cont = 1;
 		for(Interpretacao interpretacao: interpretacoes) {

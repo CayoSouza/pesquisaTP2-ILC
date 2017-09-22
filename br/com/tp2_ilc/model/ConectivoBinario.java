@@ -29,4 +29,9 @@ public class ConectivoBinario extends Conectivo{
 		
 		return matrizResultados[posicao1][posicao2];	
 	}
+
+	@Override
+	int getNumeroArgumentos() {
+		return 2;
+	}
 }

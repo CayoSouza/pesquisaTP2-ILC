@@ -16,5 +16,10 @@ public class Proposicao extends Atomo {
 	public void setSentenca(String sentenca) {
 		this.sentenca = sentenca;
 	}
+
+	@Override
+	int getNumeroArgumentos() {
+		return 0;
+	}
 	
 }

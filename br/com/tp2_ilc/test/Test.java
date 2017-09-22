@@ -9,7 +9,7 @@ import br.com.tp2_ilc.model.*;
 public class Test {
 
 	public static void main(String[] args) {
-		//Matrizes dos valores verdade dos conectivos que serÃ£o utilizados
+		//Matrizes dos valores verdade dos conectivos que serÃƒÂ£o utilizados
 		ValorVerdade[][] conectivoE = {{ValorVerdade.FALSE, ValorVerdade.FALSE}, {ValorVerdade.FALSE,ValorVerdade.TRUE}};
 		ValorVerdade[][] conectivoOU = {{ValorVerdade.FALSE, ValorVerdade.TRUE}, {ValorVerdade.TRUE, ValorVerdade.TRUE}};
 		ValorVerdade[][] conectivoOUEXCLUSIVO = {{ValorVerdade.FALSE, ValorVerdade.TRUE}, {ValorVerdade.TRUE, ValorVerdade.FALSE}};
@@ -18,16 +18,16 @@ public class Test {
 		ValorVerdade[] conectivoNEGACAO = {ValorVerdade.TRUE,ValorVerdade.FALSE};
 		
 		/*
-		 * Como os conectivos sÃ³ podem ter um caractere como char pensei em padronizar assim:
+		 * Como os conectivos sÃƒÂ³ podem ter um caractere como char pensei em padronizar assim:
 		 * OU - O
 		 * OU EXCLUSIVO - X
 		 * E - E
-		 * IMPLICAÃ‡ÃƒO - I
-		 * DUPLA IMPLICAÃ‡ÃƒO - D
-		 * NEGAÃ‡ÃƒO - N
+		 * IMPLICAÃƒâ€¡ÃƒÆ’O - I
+		 * DUPLA IMPLICAÃƒâ€¡ÃƒÆ’O - D
+		 * NEGAÃƒâ€¡ÃƒÆ’O - N
 		 */
 		
-		ConectivoBinario e = new ConectivoBinario('e', conectivoE);
+		ConectivoBinario e = new ConectivoBinario('^', conectivoE);
 		
 		/* TESTE DO CONECTIVO "E" */
 		/*System.out.println("CONECTIVO E:");
@@ -37,7 +37,7 @@ public class Test {
 		System.out.println(e.retornaValorVerdade(ValorVerdade.FALSE, ValorVerdade.FALSE).getCaractere());*/
 		/* FIM TESTE DO CONECTIVO "E" */
 		
-		ConectivoBinario ou = new ConectivoBinario('o', conectivoOU);
+		ConectivoBinario ou = new ConectivoBinario('v', conectivoOU);
 		
 		/* TESTE DO CONECTIVO "OU" */
 		/*System.out.println("CONECTIVO OU:");
@@ -47,7 +47,7 @@ public class Test {
 		System.out.println(ou.retornaValorVerdade(ValorVerdade.FALSE, ValorVerdade.FALSE).getCaractere());*/
 		/* FIM TESTE DO CONECTIVO "OU" */
 		
-		ConectivoBinario ouExclusivo = new ConectivoBinario('x', conectivoOUEXCLUSIVO);
+		ConectivoBinario ouExclusivo = new ConectivoBinario('⊕', conectivoOUEXCLUSIVO);
 		
 		/* TESTE DO CONECTIVO "OU EXCLUSIVO" */
 		/*System.out.println("CONECTIVO OU EXCLUSIVO:");
@@ -57,7 +57,7 @@ public class Test {
 		System.out.println(ouExclusivo.retornaValorVerdade(ValorVerdade.FALSE, ValorVerdade.FALSE).getCaractere());*/
 		/* FIM TESTE DO CONECTIVO "OU EXCLUSIVO" */
 		
-		ConectivoBinario implicacao = new ConectivoBinario('>', conectivoIMPLICACAO);
+		ConectivoBinario implicacao = new ConectivoBinario('→', conectivoIMPLICACAO);
 		
 		/* TESTE DO CONECTIVO "IMPLICACAO" */
 		/*System.out.println("CONECTIVO IMPLICACAO:");
@@ -67,7 +67,7 @@ public class Test {
 		System.out.println(implicacao.retornaValorVerdade(ValorVerdade.FALSE, ValorVerdade.FALSE).getCaractere());*/
 		/* FIM TESTE DO CONECTIVO "IMPLICACAO" */
 
-		ConectivoBinario duplaImplicacao = new ConectivoBinario(']', conectivoDUPLAIMPLICACAO);
+		ConectivoBinario duplaImplicacao = new ConectivoBinario('↔', conectivoDUPLAIMPLICACAO);
 		
 		/* TESTE DO CONECTIVO "DUPLA IMPLICACAO" */
 		/*System.out.println("CONECTIVO DUPLA IMPLICACAO:");
@@ -77,13 +77,13 @@ public class Test {
 		System.out.println(duplaImplicacao.retornaValorVerdade(ValorVerdade.FALSE, ValorVerdade.FALSE).getCaractere());*/
 		/* FIM TESTE DO CONECTIVO "DUPLA IMPLICACAO" */
 		
-		ConectivoUnario negacao = new ConectivoUnario('!', conectivoNEGACAO);
+		ConectivoUnario negacao = new ConectivoUnario('¬', conectivoNEGACAO);
 		
-		/*TESTE DO CONECTIVO "NEGAÃ‡ÃƒO" */
-		/*System.out.println("CONECTIVO NEGAÃ‡ÃƒO");
+		/*TESTE DO CONECTIVO "NEGAÃƒâ€¡ÃƒÆ’O" */
+		/*System.out.println("CONECTIVO NEGAÃƒâ€¡ÃƒÆ’O");
 		System.out.println(negacao.retornaValorVerdade(ValorVerdade.FALSE).getCaractere());
 		System.out.println(negacao.retornaValorVerdade(ValorVerdade.TRUE).getCaractere());*/
-		/* FIM TESTE DO CONECTIVO "NEGAÃ‡ÃƒO" */
+		/* FIM TESTE DO CONECTIVO "NEGAÃƒâ€¡ÃƒÆ’O" */
 		
 		
 		Proposicao b = new Proposicao('B', "bomdia");

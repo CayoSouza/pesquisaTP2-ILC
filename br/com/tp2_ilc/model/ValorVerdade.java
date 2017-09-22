@@ -14,4 +14,9 @@ public class ValorVerdade extends Atomo{
 	public boolean getValor() {
 		return valor;
 	}
+
+	@Override
+	int getNumeroArgumentos() {
+		return 0;
+	}
 }

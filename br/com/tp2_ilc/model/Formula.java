@@ -9,7 +9,6 @@ import javafx.beans.value.ObservableValue;
 public class Formula{
 	private boolean bemFormada;
 	private List<Simbolo> simbolos;
-	private String simboloz;
 	
 	public Formula(List<Simbolo> simbolos){
 		this.simbolos = simbolos;
@@ -48,23 +47,12 @@ public class Formula{
 	public List<Simbolo> getSimbolos() {
 		return simbolos;
 	}
-	public String pegaSimbolos() {
-		String formula = "";
-		for(Simbolo sim: simbolos) {
-			formula += sim.getCaractere();
-		}
-		return formula;
-	}
-	public String getSimboloz() {
-		String formula = "";
-		for(Simbolo sim: simbolos) {
-			formula += sim.getCaractere();
-		}
-		this.simboloz = formula;
-		return this.simboloz;
-	}
-	public void setSimboloz(String simboloz) {
-		this.simboloz = simboloz;
+	public String getExpressao() {
+		String expressao = "";
+		for(Simbolo sim: simbolos) 
+			expressao += sim.getCaractere();
+		
+		return expressao;
 	}
 	public void setSimbolos(List<Simbolo> simbolos) {
 		this.simbolos = simbolos;

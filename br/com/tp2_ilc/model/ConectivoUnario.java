@@ -24,4 +24,9 @@ public class ConectivoUnario extends Conectivo{
 		return matrizResultados[posicao];	
 	}
 
+	@Override
+	int getNumeroArgumentos() {
+		return 1;
+	}
+
 }
