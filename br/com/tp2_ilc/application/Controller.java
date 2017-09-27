@@ -321,21 +321,7 @@ public class Controller implements Initializable {
 			
 			coluna.setCellValueFactory(new PropertyValueFactory<Atribuicao, Character>("valorCaractere"));
 			tableViewTabelaVerdade.setItems(atrib);
-		}
-		
-		
-		for(int j=0; j<tableViewTabelaVerdade.getColumns().size(); j++) {
-			ObservableList<Interpretacao> interpretacao;
-			
-			for(Interpretacao inter : tabelaVerdade.getInterpretacoes()) {
-				
-				for(int i=0; i<tableViewTabelaVerdade.getColumns().size(); i++) {
-					//add na lista
-				}	
-			}
-			
-		}
-			
+		}	
 
 		TableColumn<Atribuicao, String> coluna = new TableColumn<>(
 				tabelaVerdade.getFormula().getExpressao());
