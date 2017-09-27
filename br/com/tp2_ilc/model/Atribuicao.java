@@ -16,4 +16,8 @@ public class Atribuicao {
 	public ValorVerdade getValor() {
 		return valor;
 	}
+	
+	public char getValorCaractere() {
+		return this.valor.getCaractere();
+	}
 }

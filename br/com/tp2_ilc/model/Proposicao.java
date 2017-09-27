@@ -18,7 +18,7 @@ public class Proposicao extends Atomo {
 	}
 
 	@Override
-	int getNumeroArgumentos() {
+	public int getNumeroArgumentos() {
 		return 0;
 	}
 	

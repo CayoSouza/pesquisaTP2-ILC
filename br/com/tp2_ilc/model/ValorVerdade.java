@@ -16,7 +16,7 @@ public class ValorVerdade extends Atomo{
 	}
 
 	@Override
-	int getNumeroArgumentos() {
+	public int getNumeroArgumentos() {
 		return 0;
 	}
 }

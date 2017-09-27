@@ -98,41 +98,10 @@ public class FBF extends Formula {
 //		return proposicoes;
 //	}
 
-
 	public TabelaVerdade geraTabelaVerdade() {
-		TabelaVerdade tabelaVerdade = new TabelaVerdade(this);
-		
-		String proposicoes = "";
-		for(Atomo atomo: tabelaVerdade.getListaProposicoes()) 
-			proposicoes += atomo.getCaractere() + " ";
-		
-		/*
-		 * Exibição da tabela verdade.
-		 */
-		/*System.out.println("Proposições: " +proposicoes);
-		System.out.println("Formula: " + tabelaVerdade.getFormula().getExpressao());
-		System.out.println("Interpretações + valor verdade");
-		int nInterpretacoes = tabelaVerdade.getInterpretacoes().size();
-		for(int i = 0; i < nInterpretacoes; i++) {
-			String linha = "";
-			for (Atribuicao atribuicao: tabelaVerdade.getInterpretacoes().get(i).getAtribuicoes()) {
-				linha += atribuicao.getValor().getCaractere() +  " ";
-			}
-			linha += " Valor verdade da linha: "+ tabelaVerdade.getValoresVerdade().get(i).getCaractere();
-			System.out.println(linha);
-		}*/
-		//exibeTabelaVerdade(tabelaVerdade);
-		/*Debug
-		String formula = this.pegaSimbolos();
-		int cont = 1;
-		for(Interpretacao interpretacao: list) {
-			ValorVerdade valorVerdade = valoraFormula(this, interpretacao);
-			System.out.println("Interpretacao "+cont + " da formula " +formula);
-			System.out.println("Valor: "+ valorVerdade.getCaractere() +"\n");
-			cont++;
-		}*/
-		return tabelaVerdade;
+		return new TabelaVerdade(this);
 	}
+	
 	public void exibeArgumentos() {
 		System.out.println(argumentos.get(0).getExpressao());
 		

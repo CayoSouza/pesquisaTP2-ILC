@@ -6,5 +6,5 @@ public abstract class Elemento extends Simbolo{
 		super(caractere);
 	}
 
-	abstract int getNumeroArgumentos();
+	public abstract int getNumeroArgumentos();
 }

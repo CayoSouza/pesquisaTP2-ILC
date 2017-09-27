@@ -56,7 +56,7 @@ public class Controller implements Initializable {
 	@FXML
 	private TableColumn<FBF, String> colunaFbf;
 	@FXML
-	private TableView<ObservableList<String>> tableViewTabelaVerdade;
+	private TableView<Atribuicao> tableViewTabelaVerdade;
 	// @FXML private TableColumn<TabelaVerdade, FBF> colunaFbfTabelaVerdade;
 
 	// comboboxes
@@ -89,7 +89,7 @@ public class Controller implements Initializable {
 			new ConectivoUnario('¬', conectivoNEGACAO), new ConectivoBinario('↔', conectivoDUPLAIMPLICACAO));
 	public ObservableList<FBF> fbfs = FXCollections.observableArrayList(new FBF(new Proposicao('a', "a água saudável")),
 			new FBF(new Proposicao('b', "a bola é redonda")), new FBF(new Proposicao('c', "a casa é azul")));
-	public ObservableList<Proposicao> proposicoesTabelaVerdade;
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -243,7 +243,7 @@ public class Controller implements Initializable {
 					if (conect.getCaractere() == stringConectivo)
 						conectivo = conect;
 
-				if (conectivo instanceof ConectivoBinario) {
+				if (conectivo.getNumeroArgumentos() == 2) {
 					String stringFormula2 = comboFormulas2.getSelectionModel().getSelectedItem();
 					for (FBF fbf : fbfs) {
 						if (fbf.getExpressao().equals(stringFormula1))
@@ -298,7 +298,7 @@ public class Controller implements Initializable {
 
 	public void populaTabelaVerdade(TabelaVerdade tabelaVerdade) {
 		tableViewTabelaVerdade.getColumns().clear();
-
+		
 		ArrayList<Atomo> proposicoes = tabelaVerdade.getListaProposicoes();
 
 		List<String> nomeColunas = new ArrayList<>();
@@ -308,15 +308,36 @@ public class Controller implements Initializable {
 		Collections.sort(nomeColunas);
 
 		for (int i = 0; i < nomeColunas.size(); i++) {
-			final int finalIdx = i;
-
-			TableColumn<ObservableList<String>, String> coluna = new TableColumn<>(nomeColunas.get(i));
-			coluna.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().get(finalIdx)));
+			TableColumn<Atribuicao, Character> coluna = new TableColumn<>(nomeColunas.get(i));
+			coluna.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getProprosicao().getCaractere()));
 			coluna.setMaxWidth(30);
 			tableViewTabelaVerdade.getColumns().add(coluna);
+			
+			ObservableList<Atribuicao> atrib = FXCollections.observableArrayList();
+			//atrib.clear();
+			
+			for(int k=0; k<tabelaVerdade.getInterpretacoes().size(); k++)
+				atrib.add(tabelaVerdade.getInterpretacoes().get(k).getAtribuicoes().get(i));
+			
+			coluna.setCellValueFactory(new PropertyValueFactory<Atribuicao, Character>("valorCaractere"));
+			tableViewTabelaVerdade.setItems(atrib);
 		}
+		
+		
+		for(int j=0; j<tableViewTabelaVerdade.getColumns().size(); j++) {
+			ObservableList<Interpretacao> interpretacao;
+			
+			for(Interpretacao inter : tabelaVerdade.getInterpretacoes()) {
+				
+				for(int i=0; i<tableViewTabelaVerdade.getColumns().size(); i++) {
+					//add na lista
+				}	
+			}
+			
+		}
+			
 
-		TableColumn<ObservableList<String>, String> coluna = new TableColumn<>(
+		TableColumn<Atribuicao, String> coluna = new TableColumn<>(
 				tabelaVerdade.getFormula().getExpressao());
 		tableViewTabelaVerdade.getColumns().add(coluna);
 	}

@@ -47,17 +47,17 @@ public class TabelaVerdade {
 	 */
 	private ValorVerdade calculaValorFormula(FBF fbf, Interpretacao interpretacao) {
 		ValorVerdade valor = null;
-		if(fbf.getRaiz() instanceof ConectivoUnario) {
+		if(fbf.getRaiz().getNumeroArgumentos() == 1) {
 			ConectivoUnario conec = (ConectivoUnario) fbf.getRaiz();
 			valor = conec.retornaValorVerdade(calculaValorFormula(fbf.getArgumentos().get(0), interpretacao));
 		}
-		if(fbf.getRaiz() instanceof ConectivoBinario) {
+		else if(fbf.getRaiz().getNumeroArgumentos() == 2) {
 			ConectivoBinario conec = (ConectivoBinario) fbf.getRaiz();
 			ValorVerdade valorVerdade1 = calculaValorFormula(fbf.getArgumentos().get(0), interpretacao);
 			ValorVerdade valorVerdade2 = calculaValorFormula(fbf.getArgumentos().get(1), interpretacao);
 			valor = conec.retornaValorVerdade(valorVerdade1, valorVerdade2);
 		}
-		if(fbf.getRaiz() instanceof Proposicao) {
+		else {
 			valor = interpretacao.buscaValorVerdade((Proposicao)fbf.getRaiz());
 		}
 		
@@ -102,14 +102,21 @@ public class TabelaVerdade {
 	 * Método debug
 	 */
 	public void exibeTabelaVerdade() {
-		int cont = 1;
-		for(Interpretacao interpretacao: interpretacoes) {
-			System.out.println("Interpretacao " +cont );
-			for(Atribuicao atribuicao: interpretacao.getAtribuicoes()) {
-				System.out.println("Proposicao: " + atribuicao.getProprosicao().getCaractere() + " Valor: " + atribuicao.getValor().getCaractere());
+		String proposicoes = "";
+		for(Atomo atomo: this.getListaProposicoes()) 
+			proposicoes += atomo.getCaractere() + " ";
+		
+		System.out.println("Proposições: " +proposicoes);
+		System.out.println("Formula: " + this.getFormula().getExpressao());
+		System.out.println("Interpretações + valor verdade");
+		int nInterpretacoes = this.getInterpretacoes().size();
+		for(int i = 0; i < nInterpretacoes; i++) {
+			String linha = "";
+			for (Atribuicao atribuicao: this.getInterpretacoes().get(i).getAtribuicoes()) {
+				linha += atribuicao.getValor().getCaractere() +  " ";
 			}
-			cont++;
-			System.out.println("");
-		}	
+			linha += " Valor verdade da linha: "+ this.getValoresVerdade().get(i).getCaractere();
+			System.out.println(linha);
+		}
 	}
 }

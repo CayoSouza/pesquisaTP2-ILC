@@ -25,7 +25,7 @@ public class ConectivoUnario extends Conectivo{
 	}
 
 	@Override
-	int getNumeroArgumentos() {
+	public int getNumeroArgumentos() {
 		return 1;
 	}
 

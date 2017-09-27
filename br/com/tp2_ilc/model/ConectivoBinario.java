@@ -31,7 +31,7 @@ public class ConectivoBinario extends Conectivo{
 	}
 
 	@Override
-	int getNumeroArgumentos() {
+	public int getNumeroArgumentos() {
 		return 2;
 	}
 }
