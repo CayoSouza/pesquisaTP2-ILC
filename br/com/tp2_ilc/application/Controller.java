@@ -56,8 +56,8 @@ public class Controller implements Initializable {
 	@FXML
 	private TableColumn<FBF, String> colunaFbf;
 	@FXML
-	private TableView<Atribuicao> tableViewTabelaVerdade;
-	// @FXML private TableColumn<TabelaVerdade, FBF> colunaFbfTabelaVerdade;
+	private TableView<ObservableList<String>> tableViewTabelaVerdade;
+	
 
 	// comboboxes
 	@FXML
@@ -89,7 +89,7 @@ public class Controller implements Initializable {
 			new ConectivoUnario('¬', conectivoNEGACAO), new ConectivoBinario('↔', conectivoDUPLAIMPLICACAO));
 	public ObservableList<FBF> fbfs = FXCollections.observableArrayList(new FBF(new Proposicao('a', "a água saudável")),
 			new FBF(new Proposicao('b', "a bola é redonda")), new FBF(new Proposicao('c', "a casa é azul")));
-
+	ObservableList<ObservableList<Atribuicao>> linhas = FXCollections.observableArrayList();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -97,7 +97,6 @@ public class Controller implements Initializable {
 		colunaSentenca.setCellValueFactory(new PropertyValueFactory<Proposicao, String>("sentenca"));
 		tabelaProposicao.setItems(proposicoes);
 
-		// colunaFbf.setCellValueFactory(f -> f.getValue().pegaSimbolos());
 		colunaFbf.setCellValueFactory(new PropertyValueFactory<FBF, String>("expressao"));
 		tabelaFbf.setItems(fbfs);
 	}
@@ -296,35 +295,44 @@ public class Controller implements Initializable {
 		populaTabelaVerdade(tabelaVerdade);
 	}
 
+	
 	public void populaTabelaVerdade(TabelaVerdade tabelaVerdade) {
-		tableViewTabelaVerdade.getColumns().clear();
-		
-		ArrayList<Atomo> proposicoes = tabelaVerdade.getListaProposicoes();
-
-		List<String> nomeColunas = new ArrayList<>();
-		for (Atomo a : proposicoes)
-			nomeColunas.add(String.valueOf(a.getCaractere()));
-
-		Collections.sort(nomeColunas);
-
-		for (int i = 0; i < nomeColunas.size(); i++) {
-			TableColumn<Atribuicao, Character> coluna = new TableColumn<>(nomeColunas.get(i));
-			coluna.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getProprosicao().getCaractere()));
-			coluna.setMaxWidth(30);
-			tableViewTabelaVerdade.getColumns().add(coluna);
+			tableViewTabelaVerdade.getColumns().clear();
+			ObservableList<ObservableList<String>> linhas = FXCollections.observableArrayList();
 			
-			ObservableList<Atribuicao> atrib = FXCollections.observableArrayList();
-			//atrib.clear();
+			List<String> columns = new ArrayList<String>();
+			List<String> rows = new ArrayList<String>();
+			/*
+			 * Cria cada coluna
+			 */
+			for (Atomo i : tabelaVerdade.getListaProposicoes()) {
+				columns.add(String.valueOf(i.getCaractere()));
+			}
+			columns.add(tabelaVerdade.getFormula().getExpressao());
 			
-			for(int k=0; k<tabelaVerdade.getInterpretacoes().size(); k++)
-				atrib.add(tabelaVerdade.getInterpretacoes().get(k).getAtribuicoes().get(i));
+			/*
+			 * Insere as colunas na tabela verdade
+			 */
+			for (int i = 0; i < columns.size();i++) {
+				final int finalIdx = i;
+				TableColumn<ObservableList<String>, String> column = new TableColumn<>(columns.get(i));
+				 column.setCellValueFactory(
+                         param -> new ReadOnlyObjectWrapper<>(param.getValue().get(finalIdx)));
+				 tableViewTabelaVerdade.getColumns().add(column);
+			}
+			/*
+			 * Monta cada linha da tabela verdade
+			 */
+			for(int i = 0; i < Math.pow(2, columns.size()-1); i++) {
+				ObservableList<String> row = FXCollections.observableArrayList();
+				row.clear();
+				for(Atribuicao atribuicao : tabelaVerdade.getInterpretacoes().get(i).getAtribuicoes()) {
+					row.add(String.valueOf(atribuicao.getValorCaractere()));
+				}
+				row.add(String.valueOf(tabelaVerdade.getValoresVerdade().get(i).getCaractere()));
+				linhas.add(row);
+			}
+			tableViewTabelaVerdade.setItems(linhas);
 			
-			coluna.setCellValueFactory(new PropertyValueFactory<Atribuicao, Character>("valorCaractere"));
-			tableViewTabelaVerdade.setItems(atrib);
-		}	
-
-		TableColumn<Atribuicao, String> coluna = new TableColumn<>(
-				tabelaVerdade.getFormula().getExpressao());
-		tableViewTabelaVerdade.getColumns().add(coluna);
 	}
 }
