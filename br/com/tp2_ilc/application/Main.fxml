@@ -39,9 +39,9 @@
       <VBox BorderPane.alignment="CENTER">
          <children>
             <Label text="Proposicoes" VBox.vgrow="ALWAYS">
-               <padding>
+               <VBox.margin>
                   <Insets left="70.0" />
-               </padding>
+               </VBox.margin>
             </Label>
             <TableView fx:id="tabelaProposicao" prefHeight="200.0" prefWidth="200.0">
               <columns>
@@ -69,9 +69,9 @@
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Formulas" VBox.vgrow="ALWAYS">
-               <padding>
+               <VBox.margin>
                   <Insets left="120.0" />
-               </padding>
+               </VBox.margin>
             </Label>
             <TableView fx:id="tabelaFbf" onMouseClicked="#mostrarTabelaVerdade" prefHeight="201.0" prefWidth="300.0">
               <columns>
@@ -94,6 +94,11 @@
    <right>
       <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
+            <Label text="Tabela Verdade">
+               <VBox.margin>
+                  <Insets left="100.0" />
+               </VBox.margin>
+            </Label>
             <TableView fx:id="tableViewTabelaVerdade" maxWidth="1.7976931348623157E308" prefHeight="400.0" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
