@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FBF extends Formula {
-
 	private ArrayList<Atomo> proposicoes = new ArrayList<Atomo>();
 	private ArrayList<FBF> argumentos = new ArrayList<FBF>();
 	private Elemento raiz;
@@ -97,5 +96,4 @@ public class FBF extends Formula {
 		System.out.println(argumentos.get(0).getExpressao());
 		
 	}
-
 }
