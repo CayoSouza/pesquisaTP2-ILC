@@ -13,7 +13,6 @@ public class FBF extends Formula {
 		this.raiz = valorVerdade;
 	}
 	
-
 	public FBF(Proposicao proposicao){
 		super(proposicao);
 		this.raiz = proposicao;
