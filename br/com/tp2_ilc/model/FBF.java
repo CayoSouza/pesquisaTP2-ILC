@@ -42,10 +42,6 @@ public class FBF extends Formula {
 			adicionarProposicaoNaLista(proposicao);	
 	}
 	
-	/**
-	 * Adiciona na lista somente se o átomo já não existir na mesma.
-	 * @param atomo
-	 */
 	public void adicionarProposicaoNaLista(Atomo atomo){
 		if(!this.proposicoes.contains(atomo))
 			this.proposicoes.add(atomo);
