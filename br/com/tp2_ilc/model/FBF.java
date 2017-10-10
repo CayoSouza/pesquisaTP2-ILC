@@ -8,16 +8,10 @@ public class FBF extends Formula {
 	private ArrayList<Atomo> proposicoes = new ArrayList<Atomo>();
 	private ArrayList<FBF> argumentos = new ArrayList<FBF>();
 	private Elemento raiz;
-
-//	public FBF(Atomo atomo) {
-//		super(atomo);
-//		this.raiz = atomo;
-//	}
 	
 	public FBF(ValorVerdade valorVerdade){
 		super(valorVerdade);
 		this.raiz = valorVerdade;
-		//adicionarProposicaoNaLista(valorVerdade);
 	}
 	
 
@@ -34,7 +28,6 @@ public class FBF extends Formula {
 		
 		for(Atomo proposicao : fbf.proposicoes)
 			adicionarProposicaoNaLista(proposicao);
-		
 	}
 
 	public FBF(ConectivoBinario conectivo, FBF fbf1, FBF fbf2){
@@ -47,10 +40,17 @@ public class FBF extends Formula {
 			adicionarProposicaoNaLista(proposicao);
 		
 		for(Atomo proposicao : fbf2.proposicoes)
-			adicionarProposicaoNaLista(proposicao);
-		
+			adicionarProposicaoNaLista(proposicao);	
 	}
-
+	
+	/**
+	 * Adiciona na lista somente se o √°tomo j√° n√£o existir na mesma.
+	 * @param atomo
+	 */
+	public void adicionarProposicaoNaLista(Atomo atomo){
+		if(!this.proposicoes.contains(atomo))
+			this.proposicoes.add(atomo);
+	}
 	public ArrayList<Atomo> getProposicoes() {
 		return proposicoes;
 	}
@@ -69,17 +69,8 @@ public class FBF extends Formula {
 	public void setArgumentos(ArrayList<FBF> argumentos) {
 		this.argumentos = argumentos;
 	}
-	
-	/**
-	 * Adiciona na lista somente se o ·tomo j· n„o existir na mesma.
-	 * @param atomo
-	 */
-	public void adicionarProposicaoNaLista(Atomo atomo){
-		if(!this.proposicoes.contains(atomo))
-			this.proposicoes.add(atomo);
-	}
 
-// MÈtodo descontinuado, substituÌdo por recurs„o nos construtores
+// M√©todo descontinuado, substitu√≠do por recurs√£o nos construtores
 //	/**
 //	 * Popula a lista de proposicoes recursivamente.
 //	 * @return Lista de atomos da FBF.
