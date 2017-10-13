@@ -67,27 +67,30 @@ public class Controller implements Initializable {
 	@FXML
 	private ComboBox<String> comboFormulas2 = new ComboBox<>();
 
-	ValorVerdade[][] conectivoE = { { ValorVerdade.FALSE, ValorVerdade.FALSE },
-			{ ValorVerdade.FALSE, ValorVerdade.TRUE } };
-	ValorVerdade[][] conectivoOU = { { ValorVerdade.FALSE, ValorVerdade.TRUE },
-			{ ValorVerdade.TRUE, ValorVerdade.TRUE } };
-	ValorVerdade[][] conectivoOUEXCLUSIVO = { { ValorVerdade.FALSE, ValorVerdade.TRUE },
-			{ ValorVerdade.TRUE, ValorVerdade.FALSE } };
-	ValorVerdade[][] conectivoIMPLICACAO = { { ValorVerdade.TRUE, ValorVerdade.TRUE },
-			{ ValorVerdade.FALSE, ValorVerdade.TRUE } };
-	ValorVerdade[][] conectivoDUPLAIMPLICACAO = { { ValorVerdade.TRUE, ValorVerdade.FALSE },
-			{ ValorVerdade.FALSE, ValorVerdade.TRUE } };
-	ValorVerdade[] conectivoNEGACAO = { ValorVerdade.TRUE, ValorVerdade.FALSE };
+	static final ValorVerdade FALSE = new ValorVerdade('F',false);
+	static final ValorVerdade TRUE = new ValorVerdade('V',true);
+	
+	ValorVerdade[][] conectivoE = { { FALSE, FALSE },
+			{ FALSE, TRUE } };
+	ValorVerdade[][] conectivoOU = { { FALSE, TRUE },
+			{ TRUE, TRUE } };
+	ValorVerdade[][] conectivoOUEXCLUSIVO = { { FALSE, TRUE },
+			{ TRUE, FALSE } };
+	ValorVerdade[][] conectivoIMPLICACAO = { { TRUE, TRUE },
+			{ FALSE, TRUE } };
+	ValorVerdade[][] conectivoDUPLAIMPLICACAO = { { TRUE, FALSE },
+			{ FALSE, TRUE } };
+	ValorVerdade[] conectivoNEGACAO = { TRUE, FALSE };
 
 	// listas
 	public ObservableList<Proposicao> proposicoes = FXCollections.observableArrayList(
-			new Proposicao('a', "a água saudável"), new Proposicao('b', "a bola é redonda"),
+			new Proposicao('a', "a água é saudável"), new Proposicao('b', "a bola é redonda"),
 			new Proposicao('c', "a casa é azul"));
 	public ObservableList<Conectivo> conectivos = FXCollections.observableArrayList(
 			new ConectivoBinario('^', conectivoE), new ConectivoBinario('v', conectivoOU),
 			new ConectivoBinario('⊕', conectivoOUEXCLUSIVO), new ConectivoBinario('→', conectivoIMPLICACAO),
 			new ConectivoUnario('¬', conectivoNEGACAO), new ConectivoBinario('↔', conectivoDUPLAIMPLICACAO));
-	public ObservableList<FBF> fbfs = FXCollections.observableArrayList(new FBF(new Proposicao('a', "a água saudável")),
+	public ObservableList<FBF> fbfs = FXCollections.observableArrayList(new FBF(new Proposicao('a', "a água é saudável")),
 			new FBF(new Proposicao('b', "a bola é redonda")), new FBF(new Proposicao('c', "a casa é azul")));
 	ObservableList<ObservableList<Atribuicao>> linhas = FXCollections.observableArrayList();
 
@@ -132,7 +135,7 @@ public class Controller implements Initializable {
 	public void mostrarDialogoProposicao() {
 		Dialog<Pair<Character, String>> dialog = new Dialog<>();
 		dialog.setTitle("Adicionar proposicao");
-		dialog.setHeaderText("Insira o caracter e a sentença da proprosição desejada.");
+		dialog.setHeaderText("Insira o caracter e a sentenÃ§a da proprosiÃ§Ã£o desejada.");
 		ButtonType addButton = new ButtonType("Adicionar", ButtonData.OK_DONE);
 		ButtonType cancelButton = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
 		dialog.getDialogPane().getButtonTypes().addAll(addButton, cancelButton);
@@ -170,11 +173,11 @@ public class Controller implements Initializable {
 
 		Optional<Pair<Character, String>> result = dialog.showAndWait();
 		result.ifPresent(caracterSentenca -> {
-			// checa se já existe proposicao com o caracter fornecido
-			// metodo separado com exceção
+			// checa se jÃ¡ existe proposicao com o caracter fornecido
+			// metodo separado com exceÃ§Ã£o
 			for (Proposicao p : proposicoes)
 				if (p.getCaractere() == txtCaractere.getText().charAt(0)) {
-					mostrarDialogoConfirmacao("Caracter já utilizado, a proposição não foi criada.");
+					mostrarDialogoConfirmacao("Caracter jÃ¡ utilizado, a proposiÃ§Ã£o nÃ£o foi criada.");
 					return;
 				}
 
@@ -188,7 +191,7 @@ public class Controller implements Initializable {
 	public void mostrarDialogoFormula() {
 		Dialog<FBF> dialog = new Dialog<>();
 		dialog.setTitle("Adicionar formula");
-		dialog.setHeaderText("Escolha o conectivo desejado e em seguida a(s) proposicão(oes);");
+		dialog.setHeaderText("Escolha o conectivo desejado e em seguida a(s) proposicÃ£o(oes);");
 		ButtonType addButton = new ButtonType("Adicionar", ButtonData.OK_DONE);
 		ButtonType cancelButton = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
 		dialog.getDialogPane().getButtonTypes().addAll(addButton, cancelButton);
@@ -218,7 +221,7 @@ public class Controller implements Initializable {
 		grid.add(comboFormulas2, 1, 2);
 
 		comboConectivos.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-			if (newValue.toString().equals("¬"))
+			if (newValue.toString().equals("Â¬"))
 				grid.getChildren().remove(4, 6);
 			else if (!grid.getChildren().contains(comboFormulas2)) {
 				grid.add(new Label("Formula 2"), 0, 2);
@@ -266,9 +269,9 @@ public class Controller implements Initializable {
 
 		Optional<FBF> result = dialog.showAndWait();
 		result.ifPresent(fbf -> {
-			// checa se já existe proposicao com o caracter fornecido
+			// checa se jÃ¡ existe proposicao com o caracter fornecido
 			// if(fbf.pegaSimbolos() == txtConectivo.getText().charAt(0)) {
-			// mostrarDialogoConfirmacao("Caracter já utilizado, a proposição não foi
+			// mostrarDialogoConfirmacao("Caracter jÃ¡ utilizado, a proposiÃ§Ã£o nÃ£o foi
 			// criada.");
 			// return;
 			// }

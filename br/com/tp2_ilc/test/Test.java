@@ -10,12 +10,16 @@ public class Test {
 
 	public static void main(String[] args) {
 		//Matrizes dos valores verdade dos conectivos que serÃƒÂ£o utilizados
-		ValorVerdade[][] conectivoE = {{ValorVerdade.FALSE, ValorVerdade.FALSE}, {ValorVerdade.FALSE,ValorVerdade.TRUE}};
-		ValorVerdade[][] conectivoOU = {{ValorVerdade.FALSE, ValorVerdade.TRUE}, {ValorVerdade.TRUE, ValorVerdade.TRUE}};
-		ValorVerdade[][] conectivoOUEXCLUSIVO = {{ValorVerdade.FALSE, ValorVerdade.TRUE}, {ValorVerdade.TRUE, ValorVerdade.FALSE}};
-		ValorVerdade[][] conectivoIMPLICACAO = {{ValorVerdade.TRUE, ValorVerdade.TRUE}, {ValorVerdade.FALSE, ValorVerdade.TRUE}};
-		ValorVerdade[][] conectivoDUPLAIMPLICACAO = {{ValorVerdade.TRUE,ValorVerdade.FALSE}, {ValorVerdade.FALSE,ValorVerdade.TRUE}};
-		ValorVerdade[] conectivoNEGACAO = {ValorVerdade.TRUE,ValorVerdade.FALSE};
+		
+		final ValorVerdade FALSE = new ValorVerdade('F',false);
+		final ValorVerdade TRUE = new ValorVerdade('V',true);
+		
+		ValorVerdade[][] conectivoE = {{FALSE, FALSE}, {FALSE,TRUE}};
+		ValorVerdade[][] conectivoOU = {{FALSE, TRUE}, {TRUE, TRUE}};
+		ValorVerdade[][] conectivoOUEXCLUSIVO = {{FALSE, TRUE}, {TRUE, FALSE}};
+		ValorVerdade[][] conectivoIMPLICACAO = {{TRUE, TRUE}, {FALSE, TRUE}};
+		ValorVerdade[][] conectivoDUPLAIMPLICACAO = {{TRUE,FALSE}, {FALSE,TRUE}};
+		ValorVerdade[] conectivoNEGACAO = {TRUE,FALSE};
 		
 		/*
 		 * Como os conectivos sÃƒÂ³ podem ter um caractere como char pensei em padronizar assim:

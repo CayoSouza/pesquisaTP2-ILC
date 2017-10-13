@@ -3,7 +3,6 @@ package br.com.tp2_ilc.model;
 import java.util.ArrayList;
 
 public class Interpretacao {
-
 	ArrayList<Atribuicao> atribuicoes = new ArrayList<Atribuicao>();
 
 	public ArrayList<Atribuicao> getAtribuicoes() {

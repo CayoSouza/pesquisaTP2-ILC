@@ -4,15 +4,12 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class TabelaVerdade {
-
 	ArrayList<Interpretacao> interpretacoes = new ArrayList<Interpretacao>();
 	ArrayList<ValorVerdade> valoresVerdade = new ArrayList<ValorVerdade>();
-	ArrayList<Atomo> listaProposicoes = new ArrayList<Atomo>();
 	FBF formula;
 	
 	public TabelaVerdade(FBF formula) {
 		this.formula = formula;
-		this.listaProposicoes = formula.getProposicoes();
 		geraTabelaDeInterpretacoes();
 		preencheTabelaVerdade();
 	}
@@ -30,7 +27,7 @@ public class TabelaVerdade {
 	}
 
 	public ArrayList<Atomo> getListaProposicoes() {
-		return listaProposicoes;
+		return this.formula.getProposicoes();
 	}
 	
 	/*
@@ -78,20 +75,20 @@ public class TabelaVerdade {
 	public void geraTabelaDeInterpretacoes() {
 		String interpretacaoBinaria;
 		char[] arrayInterpretacao;
-		int numProposicoes = this.listaProposicoes.size();
+		int numProposicoes = this.formula.getProposicoes().size();
 		Interpretacao interpretacao = null;
 		ValorVerdade valorVerdade;
 		//Adiciona cada interpretacao a uma lista de interpretacoes 
 		for(int i = 0; i < Math.pow(2,numProposicoes);i++) {
-			interpretacaoBinaria = converteDecimalParaBinario(i,this.listaProposicoes.size());
+			interpretacaoBinaria = converteDecimalParaBinario(i,this.formula.getProposicoes().size());
 			arrayInterpretacao = interpretacaoBinaria.toCharArray();
 			interpretacao = new Interpretacao();
 			for(int j = 0; j < numProposicoes; j++) {
 				if(arrayInterpretacao[j] == '0')
-					valorVerdade = ValorVerdade.FALSE;
+					valorVerdade = new ValorVerdade('F',false);
 				else
-					valorVerdade = ValorVerdade.TRUE;
-				Atribuicao atribuicao = new Atribuicao((Proposicao) this.listaProposicoes.get(j),valorVerdade);
+					valorVerdade = new ValorVerdade('V',true);
+				Atribuicao atribuicao = new Atribuicao((Proposicao) this.formula.getProposicoes().get(j),valorVerdade);
 				interpretacao.adicionarAtribuicao(atribuicao);
 			}
 			interpretacoes.add(interpretacao);

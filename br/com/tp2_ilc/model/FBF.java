@@ -64,25 +64,6 @@ public class FBF extends Formula {
 		this.argumentos = argumentos;
 	}
 
-// Método descontinuado, substituído por recursão nos construtores
-//	/**
-//	 * Popula a lista de proposicoes recursivamente.
-//	 * @return Lista de atomos da FBF.
-//	 */
-//	public List<Atomo> listarProposicoes(){
-//		if(this.raiz instanceof Proposicao){
-//			adicionarProposicaoNaLista((Atomo)this.raiz);
-//			return proposicoes;
-//		}
-//		else 
-//			for(FBF fbf : this.argumentos){
-//				fbf.listarProposicoes();
-//				for(Atomo p : fbf.proposicoes)
-//					adicionarProposicaoNaLista(p);
-//			}
-//		return proposicoes;
-//	}
-
 	public TabelaVerdade geraTabelaVerdade() {
 		return new TabelaVerdade(this);
 	}

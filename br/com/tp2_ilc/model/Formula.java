@@ -22,9 +22,9 @@ public class Formula{
 	public Formula(ConectivoUnario conec_unario, Formula formula){
 		this.simbolos = new ArrayList<Simbolo>();
 		this.simbolos.add(conec_unario);
-		this.simbolos.add(new Parentese('('));
+		this.simbolos.add(new Simbolo('('));
 		this.simbolos.addAll(formula.getSimbolos());
-		this.simbolos.add(new Parentese(')'));
+		this.simbolos.add(new Simbolo(')'));
 		
 		if(formula.isBemFormada())
 			this.bemFormada = true;
@@ -33,11 +33,11 @@ public class Formula{
 	}
 	public Formula(ConectivoBinario conec_binario, Formula formula1, Formula formula2 ){
 		this.simbolos = new ArrayList<Simbolo>();
-		this.simbolos.add(new Parentese('('));
+		this.simbolos.add(new Simbolo('('));
 		this.simbolos.addAll(formula1.getSimbolos());
 		this.simbolos.add(conec_binario);
 		this.simbolos.addAll(formula2.getSimbolos());
-		this.simbolos.add(new Parentese(')'));
+		this.simbolos.add(new Simbolo(')'));
 		
 		if(formula1.isBemFormada() && formula2.isBemFormada())
 			this.bemFormada = true;

@@ -9,20 +9,14 @@ public class ConectivoBinario extends Conectivo{
 		this.matrizResultados = matriz;
 	}
 	
-	//Válido para a versão em que não havia uma matriz com resultados.
-	
-	/*public ConectivoBinario(char caractere) {
-		super(caractere);	
-	}*/
-	
 	public ValorVerdade retornaValorVerdade(ValorVerdade valorEsquerda, ValorVerdade valorDireita) {
 		int posicao1, posicao2;
-		if(valorEsquerda == ValorVerdade.TRUE) 
+		if(valorEsquerda.equals(new ValorVerdade('V',true))) 
 			posicao1 = 1;
 		else
 			posicao1 = 0;
 		
-		if(valorDireita == ValorVerdade.TRUE) 
+		if(valorDireita.equals(new ValorVerdade('V',true))) 
 			posicao2 = 1;
 		else
 			posicao2 = 0;
