@@ -110,7 +110,7 @@ public class TabelaVerdade {
 		for(int i = 0; i < nInterpretacoes; i++) {
 			String linha = "";
 			for (Atribuicao atribuicao: this.getInterpretacoes().get(i).getAtribuicoes()) {
-				linha += atribuicao.getValor().getCaractere() +  " ";
+				linha += atribuicao.getValorVerdade().getCaractere() +  " ";
 			}
 			linha += " Valor verdade da linha: "+ this.getValoresVerdade().get(i).getCaractere();
 			System.out.println(linha);

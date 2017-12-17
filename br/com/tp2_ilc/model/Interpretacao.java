@@ -19,15 +19,15 @@ public class Interpretacao {
 	
 	public Atribuicao buscaAtribuicao(Proposicao proposicao){
 		for(Atribuicao a : atribuicoes) {
-			if(a.getProprosicao() == proposicao)
+			if(a.getProposicao() == proposicao)
 				return a;	
 		}
 		return null;
 	}
 	public ValorVerdade buscaValorVerdade(Proposicao proposicao){
 		for(Atribuicao a : atribuicoes) {
-			if(a.getProprosicao() == proposicao)
-				return a.getValor();	
+			if(a.getProposicao() == proposicao)
+				return a.getValorVerdade();	
 		}
 		return null;
 	}

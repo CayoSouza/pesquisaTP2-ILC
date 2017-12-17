@@ -135,7 +135,7 @@ public class Controller implements Initializable {
 	public void mostrarDialogoProposicao() {
 		Dialog<Pair<Character, String>> dialog = new Dialog<>();
 		dialog.setTitle("Adicionar proposicao");
-		dialog.setHeaderText("Insira o caracter e a sentenÃ§a da proprosiÃ§Ã£o desejada.");
+		dialog.setHeaderText("Insira o caracter e a sentenÃƒÂ§a da proprosiÃƒÂ§ÃƒÂ£o desejada.");
 		ButtonType addButton = new ButtonType("Adicionar", ButtonData.OK_DONE);
 		ButtonType cancelButton = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
 		dialog.getDialogPane().getButtonTypes().addAll(addButton, cancelButton);
@@ -173,11 +173,11 @@ public class Controller implements Initializable {
 
 		Optional<Pair<Character, String>> result = dialog.showAndWait();
 		result.ifPresent(caracterSentenca -> {
-			// checa se jÃ¡ existe proposicao com o caracter fornecido
-			// metodo separado com exceÃ§Ã£o
+			// checa se jÃƒÂ¡ existe proposicao com o caracter fornecido
+			// metodo separado com exceÃƒÂ§ÃƒÂ£o
 			for (Proposicao p : proposicoes)
 				if (p.getCaractere() == txtCaractere.getText().charAt(0)) {
-					mostrarDialogoConfirmacao("Caracter jÃ¡ utilizado, a proposiÃ§Ã£o nÃ£o foi criada.");
+					mostrarDialogoConfirmacao("Caracter jÃƒÂ¡ utilizado, a proposiÃƒÂ§ÃƒÂ£o nÃƒÂ£o foi criada.");
 					return;
 				}
 
@@ -191,7 +191,7 @@ public class Controller implements Initializable {
 	public void mostrarDialogoFormula() {
 		Dialog<FBF> dialog = new Dialog<>();
 		dialog.setTitle("Adicionar formula");
-		dialog.setHeaderText("Escolha o conectivo desejado e em seguida a(s) proposicÃ£o(oes);");
+		dialog.setHeaderText("Escolha o conectivo desejado e em seguida a(s) proposicÃƒÂ£o(oes);");
 		ButtonType addButton = new ButtonType("Adicionar", ButtonData.OK_DONE);
 		ButtonType cancelButton = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
 		dialog.getDialogPane().getButtonTypes().addAll(addButton, cancelButton);
@@ -221,7 +221,7 @@ public class Controller implements Initializable {
 		grid.add(comboFormulas2, 1, 2);
 
 		comboConectivos.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-			if (newValue.toString().equals("Â¬"))
+			if (newValue.toString().equals("Ã‚Â¬"))
 				grid.getChildren().remove(4, 6);
 			else if (!grid.getChildren().contains(comboFormulas2)) {
 				grid.add(new Label("Formula 2"), 0, 2);
@@ -269,9 +269,9 @@ public class Controller implements Initializable {
 
 		Optional<FBF> result = dialog.showAndWait();
 		result.ifPresent(fbf -> {
-			// checa se jÃ¡ existe proposicao com o caracter fornecido
+			// checa se jÃƒÂ¡ existe proposicao com o caracter fornecido
 			// if(fbf.pegaSimbolos() == txtConectivo.getText().charAt(0)) {
-			// mostrarDialogoConfirmacao("Caracter jÃ¡ utilizado, a proposiÃ§Ã£o nÃ£o foi
+			// mostrarDialogoConfirmacao("Caracter jÃƒÂ¡ utilizado, a proposiÃƒÂ§ÃƒÂ£o nÃƒÂ£o foi
 			// criada.");
 			// return;
 			// }

@@ -2,22 +2,22 @@ package br.com.tp2_ilc.model;
 
 public class Atribuicao {
 	private Proposicao proposicao;
-	private ValorVerdade valor;
+	private ValorVerdade valorVerdade;
 	
-	public Atribuicao(Proposicao proprosicao, ValorVerdade valor) {
-		this.proposicao = proprosicao;
-		this.valor = valor;
+	public Atribuicao(Proposicao proposicao, ValorVerdade valor) {
+		this.proposicao = proposicao;
+		this.valorVerdade = valor;
 	}
 
-	public Proposicao getProprosicao() {
+	public Proposicao getProposicao() {
 		return proposicao;
 	}
 
-	public ValorVerdade getValor() {
-		return valor;
+	public ValorVerdade getValorVerdade() {
+		return valorVerdade;
 	}
 	
 	public char getValorCaractere() {
-		return this.valor.getCaractere();
+		return this.valorVerdade.getCaractere();
 	}
 }
